@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function uploadAvatar(Request $request){
+
+        $filename = $request->image->getClientOriginalName();
+
+        $request->image->storeAs('images', $filename, 'public');
+        auth()->user()->update(['avatar' => $filename]);
+        return redirect()->back();
+    }
+
     public function index(){
 //
 //        $user = new User();
