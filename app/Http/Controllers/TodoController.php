@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TodoCreateRequest;
 use App\Models\Todo;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TodoController extends Controller
 {
@@ -16,7 +17,8 @@ class TodoController extends Controller
 
     }
 
-    public function store(Request $request) {
+    public function store(TodoCreateRequest $request) {
+
         Todo::create($request->all());
         return redirect()->back()->with('message', 'New Todo created successfully.');
     }
