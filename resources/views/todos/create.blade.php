@@ -1,25 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <title>Todos</title>
-</head>
-<body>
-<h1>What next you need to-DO?</h1>
-<x-alert />
-<form method="POST" action="/todos/create">
-    @csrf
-    <input type="text" name="title" />
-    <input type="submit" value="create" />
-</form>
-</body>
+@extends('todos/layout')
+
+
+<div class="container text-center">
+    <h1  class="my-4">What next you need to-DO?</h1> <span></span>
+    <x-alert />
+    <form method="POST" class="form-group" action="/todos/create">
+        @csrf
+        <label for="title">Text</label>
+        <input class="form-control mb-4" type="text" name="title" />
+        <input class="btn btn-primary" type="submit" value="create" />
+    </form>
+
+    <a href="/todos" class="btn btn-info my-5"> <- back</a>
+</div>
 
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-</html>
