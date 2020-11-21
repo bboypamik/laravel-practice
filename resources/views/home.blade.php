@@ -26,6 +26,7 @@
                                 <input type="submit" value="upload"/>
                             </form>
                     </div>
+                    <todo-complete></todo-complete>
                 </div>
             </div>
         </div>

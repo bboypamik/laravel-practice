@@ -1,27 +1,16 @@
 @extends('todos/layout')
 
 @section('content')
-<div>
-    <h1 class="my-4">All Todos</h1>
-    <x-alert />
-    <ul class="list-group ">
-        @foreach($todos as $todo)
+    <div class="w-50 mx-auto">
+        <div class="d-flex justify-content-around mt-5" style="background-color: #cccccc; border-radius: 5px">
+            <h1 class="my-5 font-weight-bold">TODOS</h1>
+            <a href="/todos/create" class=" my-5"><i class="fas fa-plus-circle fa-3x" style="color:#4682B4"></i></a>
+        </div>
 
-            <li class="list-group-item d-flex justify-content-between">
+        <x-alert/>
 
-                <a class="btn btn-info" href="{{'/todos/'.$todo->id.'/edit'}}" >edit</a>
-
-                <p>{{$todo->title}}</p>
-
-                <button class="btn btn-danger btn-sm" >delete</button>
-
-            </li>
-
-        @endforeach
-    </ul>
-
-    <a href="/todos/create" class="btn btn-primary mt-4">Create New Todo</a>
-</div>
+    <todo-list :todos = "{{$todos}}"></todo-list>
+    </div>
 
 @endsection
 
