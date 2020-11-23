@@ -9,7 +9,7 @@ class TodoController extends Controller
 {
     public function index(){
 
-        $todos = Todo::orderBy('completed')->get();
+        $todos = Todo::orderBy('completed')->latest()->get();
         return view('todos.index', compact('todos'));
     }
 
@@ -41,14 +41,17 @@ class TodoController extends Controller
 
             if ($todo->completed) {
                 $todo->update(['completed' => false]);
+                return $todo->orderBy('completed')->latest()->get();
             }else{
                 $todo->update(['completed' => true]);
+                return $todo->orderBy('completed')->latest()->get();
+
             }
     }
 
     public function destroy(Todo $todo){
         $todo->delete();
-        return $todo->latest()->get();
+        return $todo->orderBy('completed')->latest()->get();
     }
 
 

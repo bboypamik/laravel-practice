@@ -1,10 +1,14 @@
 <template>
     <div class="mt-3">
+<!--       <TodoMessage v-if="message" :message="message" />-->
+        <div class="message">
+            {{message}}
+        </div>
         <ul>
             <div class="d-flex justify-content-between" v-for="todo in arrayOfTodos" :key="todo.id">
                 <div v-if="todo.completed == false" class="d-flex not-completed" >
                     <a   @click.prevent="markComplete(todo)"><i class="fas fa-check-circle fa-2x"></i></a>
-                    <p class="completed-mark"> {{todo.title}}</p>
+                    <p class="completed-mark font-weight-bolder"> {{todo.title}}</p>
                 </div>
                 <div v-if="todo.completed == true" class="d-flex is-completed" >
                     <a @click.prevent="markComplete(todo)"><i class="fas fa-check-circle fa-2x"></i></a>
@@ -21,35 +25,50 @@
 
 <script>
 
+    import TodoMessage from "./TodoMessage";
     export default {
         name: "TodoList",
+        components: {TodoMessage},
         props: {todos: Array},
         data() {
             return {
-             arrayOfTodos: this.todos
+                arrayOfTodos: this.todos,
+                message: '',
+                timer: Function
             }
         },
 
         methods: {
             markComplete(todo) {
                 axios.put('/todos/' + todo.id + '/complete')
-                    .then((res) => todo.completed = !todo.completed)
+                    .then((res) => {
+                        this.arrayOfTodos = res.data
+                        if (todo.completed) {
+                            this.todoMessage('Todo unmarked')
+                        } else {
+                            this.todoMessage('Todo marked as complete')
+                        }
+                    })
                     .catch(err => console.log(err))
             },
 
-            deleteTodo(id){
+            deleteTodo(id) {
                 axios.delete('/todos/' + id + '/delete')
-                    .then((res) => this.arrayOfTodos = res.data)
+                    .then((res) => {
+                            this.arrayOfTodos = res.data
+                            this.todoMessage('Todo deleted')
+
+                        }
+                    )
                     .catch(err => console.log(err))
+            },
+
+            todoMessage(msg){
+                this.message = msg
+              this.timer = setTimeout(() => this.message = '', 3000)
             }
         },
 
-
-
-        created() {
-            // this.todoClass(todo)
-            //
-        }
     }
 </script>
 
@@ -76,5 +95,12 @@
         text-decoration: none;
 
     }
+
+    .message {
+        background-color: #d4edda;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+
 
 </style>
