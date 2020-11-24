@@ -21,7 +21,7 @@ class TodoController extends Controller
     public function store(TodoCreateRequest $request) {
 
         Todo::create($request->all());
-        return redirect('todos')->with('message', 'New Todo created successfully.');
+        return redirect('todo')->with('message', 'New Todo created successfully.');
     }
 
     public function edit(Todo $todo){
@@ -33,25 +33,25 @@ class TodoController extends Controller
     public function update(TodoCreateRequest $request, Todo $todo){
 
         $todo->update(['title' => $request->title]);
-        return redirect('todos')->with('message', 'Updated!');
+        return redirect('todo')->with('message', 'Updated!');
 
-    }
-
-    public function complete( Todo $todo) {
-
-            if ($todo->completed) {
-                $todo->update(['completed' => false]);
-                return $todo->orderBy('completed')->latest()->get();
-            }else{
-                $todo->update(['completed' => true]);
-                return $todo->orderBy('completed')->latest()->get();
-
-            }
     }
 
     public function destroy(Todo $todo){
         $todo->delete();
         return $todo->orderBy('completed')->latest()->get();
+    }
+
+    public function complete( Todo $todo) {
+
+        if ($todo->completed) {
+            $todo->update(['completed' => false]);
+            return $todo->orderBy('completed')->latest()->get();
+        }else{
+            $todo->update(['completed' => true]);
+            return $todo->orderBy('completed')->latest()->get();
+
+        }
     }
 
 

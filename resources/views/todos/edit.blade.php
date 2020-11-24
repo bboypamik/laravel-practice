@@ -12,7 +12,7 @@
             <input class="btn btn-primary" type="submit" value="Update" />
         </form>
 
-        <a href="/todos" class="btn btn-info my-5"> <- back</a>
+        <a href="{{route('todo.index')}}" class="btn btn-info my-5"> <- back</a>
     </div>
 
 @endsection
