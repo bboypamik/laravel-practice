@@ -57,4 +57,8 @@ public static function uploadAvatar($image){
             Storage::delete('/public/images/' . auth()->user()->avatar);
         }
     }
+
+    public function todos(){
+    return $this->hasMany(Todo::class);
+    }
 }

@@ -12,8 +12,12 @@
 
         </div>
 
-
+        @if($todos->count() > 0)
         <todo-list :todos="{{$todos}}"></todo-list>
+            @else
+        <p class="mt-3 font-weight-bold">No tasks, create one</p>
+
+            @endif
     </div>
 @endsection
 

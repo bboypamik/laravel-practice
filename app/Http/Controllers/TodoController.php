@@ -7,9 +7,14 @@ use App\Models\Todo;
 
 class TodoController extends Controller
 {
-    public function index(){
 
-        $todos = Todo::orderBy('completed')->latest()->get();
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
+    public function index(){
+        $todos = auth()->user()->todos()->orderBy('completed')->latest()->get();
         return view('todos.index', compact('todos'));
     }
 
@@ -19,9 +24,12 @@ class TodoController extends Controller
     }
 
     public function store(TodoCreateRequest $request) {
+        $todoId = auth()->id();
+
+        $request['user_id'] = $todoId;
 
         Todo::create($request->all());
-        return redirect('todo')->with('message', 'New Todo created successfully.');
+        return redirect(route('todo.index'))->with('message', 'New Todo created successfully.');
     }
 
     public function edit(Todo $todo){
@@ -39,17 +47,17 @@ class TodoController extends Controller
 
     public function destroy(Todo $todo){
         $todo->delete();
-        return $todo->orderBy('completed')->latest()->get();
+        return auth()->user()->todos()->orderBy('completed')->latest()->get();
     }
 
     public function complete( Todo $todo) {
 
         if ($todo->completed) {
             $todo->update(['completed' => false]);
-            return $todo->orderBy('completed')->latest()->get();
+            return auth()->user()->todos()->orderBy('completed')->latest()->get();
         }else{
             $todo->update(['completed' => true]);
-            return $todo->orderBy('completed')->latest()->get();
+            return auth()->user()->todos()->orderBy('completed')->latest()->get();
 
         }
     }
