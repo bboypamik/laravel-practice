@@ -18,6 +18,7 @@ class UserController extends Controller
     }
 
 
+    //Here is one random comment
 
     public function index()
     {
