@@ -37,7 +37,7 @@ class TodoController extends Controller
 
         return view('todos.edit', compact('todo'));
 
-   
+    }  
 
     public function update(TodoCreateRequest $request, Todo $todo){
 
