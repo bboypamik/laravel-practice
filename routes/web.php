@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/todos/{todo}/edit', [TodoController::class, 'edit']);
 //Route::delete('/todos/{todo}/delete', [TodoController::class, 'destroy'])->name('todo.destroy');
 
-
+//another test command
 
 Route::resource('/todo', TodoController::class);
 Route::put('/todo/{todo}/complete', [TodoController::class, 'complete'])->name('todo.complete');
