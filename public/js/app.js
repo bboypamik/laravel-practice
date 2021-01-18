@@ -1940,7 +1940,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       arrayOfTodos: this.todos,
-      message: ''
+      message: '',
+      description: false
     };
   },
   methods: {

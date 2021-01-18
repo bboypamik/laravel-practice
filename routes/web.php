@@ -5,7 +5,6 @@ use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +26,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::resource('/todo', TodoController::class);
-
 Route::put('/todo/{todo}/complete', [TodoController::class, 'complete'])->name('todo.complete');
 
 
@@ -38,7 +36,7 @@ Route::get('/', function () {
 
 Route::get('/user', [UserController::class, 'index']);
 
-Route::post('/upload', [UserController::class, 'uploadAvatar']);
+Route::post('/upload', [UserController::class, 'uploadAvatar'])->name('upload');
 
 Auth::routes();
 

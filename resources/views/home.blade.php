@@ -20,7 +20,7 @@
                         <x-alert>
                               <h1>Response from image upload</h1>
                         </x-alert>
-                            <form action="/upload" method="post" enctype="multipart/form-data">
+                            <form action="{{route('upload')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="file" name="image"/>
                                 <input type="submit" value="upload"/>

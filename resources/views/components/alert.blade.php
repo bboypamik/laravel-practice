@@ -1,4 +1,4 @@
-<div>
+<div id="session-message" >
 @if(session()->has('message'))
         {{$slot}}
         <div class="alert alert-success"> {{session()->get('message')}} </div>
@@ -16,3 +16,10 @@
         </div>
     @endif
 </div>
+
+<script>
+
+    setTimeout(function () {
+        $('#session-message').remove();
+    }, 3000);
+</script>

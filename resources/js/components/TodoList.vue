@@ -31,6 +31,7 @@
             return {
                 arrayOfTodos: this.todos,
                 message: '',
+                description: false
             }
         },
 
